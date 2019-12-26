@@ -5,7 +5,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class Test {
+public class SynchronizedLockResTest {
 
     private int y;
 
@@ -21,6 +21,7 @@ public class Test {
     /**
      * 有性能问题
      * 本质是对数据资源的同步控制，不是对方法
+     * 会先访问monitor
      */
     public synchronized void test() {
 
@@ -51,7 +52,7 @@ public class Test {
     //乐观锁：读不加锁，写之前判断是否和取之前相同，不同加锁，同直接写
     //悲观锁：读就加锁，写后解锁
     static synchronized void test6() {} //monitor为对象，和synchronized(Test.class)一样
-    volatile Test test; // 让test的初始化有同步性，对除double和float赋值之外，
+    volatile SynchronizedLockResTest test; // 让test的初始化有同步性，对除double和float赋值之外，
     // 对引用有效，可以理解为synchronized的简单版
     // 比如双锁单例，可能初始化没完成，但是对象不为空
     AtomicInteger count = new AtomicInteger(0);//对基本类型，使用这种轻量级api
