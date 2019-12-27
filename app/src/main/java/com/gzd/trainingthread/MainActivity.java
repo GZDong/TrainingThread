@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         };
         Executor executor = Executors.newCachedThreadPool();
         ExecutorService executors = Executors.newFixedThreadPool(20);//适合批量处理
-        executors.shutdown();
+        executors.shutdown(); //记得关掉
         executor.execute(runnable);
         BlockingDeque<Runnable> queue = new LinkedBlockingDeque<>(1000);
         new ThreadPoolExecutor(5, 5, 5, TimeUnit.SECONDS, queue);
